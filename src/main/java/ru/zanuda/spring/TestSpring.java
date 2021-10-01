@@ -8,12 +8,11 @@ public class TestSpring {
           "applicationContext.xml"
         );
 
-//        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
-//
-//        musicPlayer.playMusic();
+       MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+       musicPlayer.playMusic(GENRES.RAP);
+       musicPlayer.playMusic(GENRES.ROCK);
 
-        Computer computer = context.getBean("computer", Computer.class);
-        System.out.println(computer);
+
         context.close();
     }
 }

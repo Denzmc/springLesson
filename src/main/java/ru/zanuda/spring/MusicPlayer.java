@@ -7,24 +7,31 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class MusicPlayer {
 
-    private Music music1;
-    private Music music2;
+    private RapMusic rapMusic;
+    private RockMusic rockMusic;
 
     @Autowired
-    public MusicPlayer(@Qualifier("rapMusic") Music music1,
-                       @Qualifier("rockMusic") Music music2) {
-        this.music1 = music1;
-        this.music2 = music2;
+    public MusicPlayer(RapMusic music1,
+                       RockMusic music2) {
+        rapMusic = music1;
+        rockMusic = music2;
     }
 
 
-    public String playMusic(){
+    public void playMusic(GENRES genres){
+        Random random = new Random();
+        int randomNun = random.nextInt(3);
 
-        return "Playing: " + music1.getSong() + ", " + music2.getSong();
+        if (genres == GENRES.RAP){
+            System.out.println(rapMusic.getSong().get(randomNun));
+        } else {
+            System.out.println(rockMusic.getSong().get(randomNun));
+        }
 
     }
 
