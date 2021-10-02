@@ -2,6 +2,7 @@ package ru.zanuda.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,30 +10,36 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-@Component
+//@Component
 public class MusicPlayer {
 
-    private RapMusic rapMusic;
-    private RockMusic rockMusic;
+    public String getName() {
+        return name;
+    }
 
-    @Autowired
-    public MusicPlayer(RapMusic music1,
-                       RockMusic music2) {
-        rapMusic = music1;
-        rockMusic = music2;
+    public int getVolume() {
+        return volume;
+    }
+    @Value("${musicPlayer.name}")
+    private String name;
+
+    @Value("${musicPlayer.volume}")
+    private int volume;
+
+    private Music music1;
+    private Music music2;
+
+//    @Autowired
+    public MusicPlayer(@Qualifier("rockMusic") Music music1,
+                       @Qualifier("rapMusic") Music music2) {
+        this.music1 = music1;
+        this.music2 = music2;
     }
 
 
-    public void playMusic(GENRES genres){
-        Random random = new Random();
-        int randomNun = random.nextInt(3);
+    public String playMusic(){
 
-        if (genres == GENRES.RAP){
-            System.out.println(rapMusic.getSong().get(randomNun));
-        } else {
-            System.out.println(rockMusic.getSong().get(randomNun));
-        }
-
+        return "Playing: " + music1.getSong() + ", " + music2.getSong();
     }
 
 }

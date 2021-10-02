@@ -6,14 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Component
-public class RockMusic implements Music{
-
-    private List<String > rock = new ArrayList<>(Arrays.asList("Him","Metallica","IronMaiden"));
-
-
+//@Component
+public class RockMusic implements Music {
     @Override
-    public List<String > getSong() {
-        return rock;
+    public String getSong() {
+        return "Wind cries Mary";
     }
 }

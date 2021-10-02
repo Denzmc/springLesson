@@ -1,25 +1,29 @@
 package ru.zanuda.spring;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Component
+//@Component
 public class RapMusic implements Music{
 
-    private List<String > rap = new ArrayList<>();
-
-    {
-        rap.add("65cent");
-        rap.add("25cent");
-        rap.add("50cent");
+    @PostConstruct
+    public void doMyInit(){
+        System.out.println("Doing my initialization");
     }
 
+    @PreDestroy
+    public void doMyDestroy(){
+        System.out.println("Destruction");
+    }
 
     @Override
-    public List<String> getSong() {
-        return rap;
+    public String getSong() {
+        return "2PAC";
     }
 }

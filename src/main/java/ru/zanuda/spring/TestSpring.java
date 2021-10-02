@@ -1,17 +1,19 @@
 package ru.zanuda.spring;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestSpring {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-          "applicationContext.xml"
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                SpringConfig.class
         );
 
-       MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
-       musicPlayer.playMusic(GENRES.RAP);
-       musicPlayer.playMusic(GENRES.ROCK);
+        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
 
+        System.out.println(musicPlayer.getName());
+        System.out.println(musicPlayer.getVolume());
+        RapMusic rapMusic = context.getBean("rapMusic", RapMusic.class);
 
         context.close();
     }
